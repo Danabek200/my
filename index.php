@@ -276,7 +276,19 @@ $posts = $sql->fetch();
               ?>...</p>
                 </h2>
                 
-                <p><?php $str_le
+                <p><?php $str_len = strlen($row['text']);
+                if ($str_len > '100'){
+                  $row['text'] = mb_substr($row['text'], 0, 100);
+                  $i=strlen(trim($row['text']));
+                  $s = false;
+            while($s && $i>0) {
+                if (mb_substr($row['text'], $i-1, 1)==' ')
+                    $s = true;
+                $row['text'] = mb_substr($row['text'], 0, -1);
+                $i--;
+            }
+}
+          echo $row['text'];
               ?>...</p>
                 <a href="single_blog.php?id=<?=$row['id']?>" class="read-more">Tolig'iraq →</a>
               </div>
@@ -351,19 +363,19 @@ $posts = $sql->fetch();
         <div class="row text-center">
           <p>&copy; Baker Theme. All Rights Reserved.</p>
           <div class="credits">
-            <!-- 
+            
                 All the links in the footer should remain intact. 
                 You can delete the links only if you purchased the pro version.
                 Licensing information: https://bootstrapmade.com/license/
                 Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Baker
             -->
-            Designed  by <a href="https://bootstrapmade.com/">Bootstrap Themes</a>
-        </div>
+            <!-- Designed  by <a href="https://bootstrapmade.com/">Bootstrap Themes</a> -->
+        <!-- </div>
         </div>
       </div>
-    </footer> -->
+    </footer>  -->
     <!---->
-  </div>
+  <!-- </div> -->
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery.easing.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -372,5 +384,5 @@ $posts = $sql->fetch();
     <script src="js/custom.js"></script>
     <script src="contactform/contactform.js"></script>
     
-  </body>
+</body>
 </html>
